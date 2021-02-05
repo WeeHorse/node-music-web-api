@@ -29,7 +29,7 @@ const db = mysql.createConnection({
   password : 'mysql',
   database : 'receptia'
 });
-// vi gör om metoderna connect och query till promise-metoder så att vi kan använda async/await för att vänta på databasen
+// vi gör om mysql-metoderna connect och query till promise-metoder så att vi kan använda async/await för att vänta på databasen
 const util = require('util')
 db.connect = util.promisify(db.connect)
 db.query = util.promisify(db.query)
