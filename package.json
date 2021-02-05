@@ -4,6 +4,7 @@
   "description": "wrapping you tube music and sql through express to a unified whole",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/WeeHorse/node-music-web-api/issues"
   },
-  "homepage": "https://github.com/WeeHorse/node-music-web-api#readme"
+  "homepage": "https://github.com/WeeHorse/node-music-web-api#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-session": "^1.17.1",
+    "mysql": "^2.18.1"
+  }
 }
