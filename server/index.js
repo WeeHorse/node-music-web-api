@@ -1,19 +1,23 @@
+// server port
+const port = 3000
+
+// express server
 const express = require('express')
 const app = express()
 
-// läser in modulen body-parser
+// add body-parser to express
 const bodyParser = require('body-parser')
-// registrerar den som middleware
+// register as middleware
 app.use( bodyParser.json() )
 
-// läser in modulen...
+// add cookie-parser to express
 const cookieParser = require('cookie-parser')
-// registrerar den som middleware
+// register as middleware
 app.use(cookieParser())
 
-// läser in module...
+// add express-session to express
 const session = require('express-session')
-// registrerar den som middleware
+// register as middleware
 app.use( session( {
   secret: 'keyboard cat boddyfollymeskaweq456',
   resave: false,
@@ -21,7 +25,7 @@ app.use( session( {
   cookie: { secure: false } // ändra till true för secure cookie (felsöka behövs här nu)
 } ) )
 
-// läser in mysql
+// mysql
 const mysql = require('mysql');
 const db = mysql.createConnection({
   host     : '127.0.0.1',
@@ -34,10 +38,18 @@ const util = require('util')
 db.connect = util.promisify(db.connect)
 db.query = util.promisify(db.query)
 
+// load apis / endpoints
+
+require('./youtube-rest-endpoints.js')(app, mysql)
+
+require('./data-rest-endpoints.js')(app, mysql)
 
 
+// example client
+const path = require('path')
+app.use(express.static(path.join(__dirname, '../example-client')))
 
-// starta servern
+// start the server
 app.listen(3000, async () => {
   await db.connect()
   console.log('server running on port 3000')
