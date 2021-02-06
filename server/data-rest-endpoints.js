@@ -1,4 +1,4 @@
-module.exports = (app, mysql) => {
+module.exports = (app, db) => {
 
 
 

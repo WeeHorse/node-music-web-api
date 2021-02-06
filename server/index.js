@@ -31,7 +31,7 @@ const db = mysql.createConnection({
   host     : '127.0.0.1',
   user     : 'root',
   password : 'mysql',
-  database : 'receptia'
+  database : 'nodemusic'
 });
 // vi gör om mysql-metoderna connect och query till promise-metoder så att vi kan använda async/await för att vänta på databasen
 const util = require('util')
@@ -40,9 +40,9 @@ db.query = util.promisify(db.query)
 
 // load apis / endpoints
 
-require('./youtube-rest-endpoints.js')(app, mysql)
+require('./youtube-rest-endpoints.js')(app, db)
 
-require('./data-rest-endpoints.js')(app, mysql)
+require('./data-rest-endpoints.js')(app, db)
 
 
 // example client
