@@ -492,6 +492,26 @@
 			"response": []
 		},
 		{
+			"name": "localhost:3000/api/examples_with_colors/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/examples_with_colors/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"examples_with_colors",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "localhost:3000/api/login",
 			"event": [
 				{
@@ -646,7 +666,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/examples/3",
+					"raw": "localhost:3000/api/examples/4",
 					"host": [
 						"localhost"
 					],
@@ -654,7 +674,7 @@
 					"path": [
 						"api",
 						"examples",
-						"3"
+						"4"
 					]
 				}
 			},
@@ -688,7 +708,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/examples/3",
+					"raw": "localhost:3000/api/examples/4",
 					"host": [
 						"localhost"
 					],
@@ -696,7 +716,7 @@
 					"path": [
 						"api",
 						"examples",
-						"3"
+						"4"
 					]
 				}
 			},
@@ -898,7 +918,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/examples/3",
+					"raw": "localhost:3000/api/examples/4",
 					"host": [
 						"localhost"
 					],
@@ -906,7 +926,7 @@
 					"path": [
 						"api",
 						"examples",
-						"3"
+						"4"
 					]
 				}
 			},
@@ -940,7 +960,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/examples/3",
+					"raw": "localhost:3000/api/examples/4",
 					"host": [
 						"localhost"
 					],
@@ -948,7 +968,7 @@
 					"path": [
 						"api",
 						"examples",
-						"3"
+						"4"
 					]
 				}
 			},

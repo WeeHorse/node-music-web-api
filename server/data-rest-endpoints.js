@@ -57,10 +57,9 @@ module.exports = (app, db) => {
     response.json(data)
   })
 
-  // public get one table row
-  app.get("/api/examples/:id", async (request, response) => {
-    let data = await db.query("SELECT * FROM examples WHERE id = ?", [request.params.id])
-    data = data[0] // single row
+  // public get another table (happens to be a left joined view)
+  app.get("/api/examples_with_colors", async (request, response) => {
+    let data = await db.query("SELECT * FROM examples_with_colors")
     response.json(data)
   })
 

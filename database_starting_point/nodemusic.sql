@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.17)
 # Database: nodemusic
-# Generation Time: 2021-02-07 02:26:19 +0000
+# Generation Time: 2021-02-07 02:43:11 +0000
 # ************************************************************
 
 
@@ -18,6 +18,29 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table example_colors
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `example_colors`;
+
+CREATE TABLE `example_colors` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `value` varchar(255) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+LOCK TABLES `example_colors` WRITE;
+/*!40000 ALTER TABLE `example_colors` DISABLE KEYS */;
+
+INSERT INTO `example_colors` (`id`, `value`)
+VALUES
+	(1,'red'),
+	(2,'blue');
+
+/*!40000 ALTER TABLE `example_colors` ENABLE KEYS */;
+UNLOCK TABLES;
 
 
 # Dump of table examples
@@ -43,33 +66,28 @@ LOCK TABLES `examples` WRITE;
 INSERT INTO `examples` (`id`, `name`, `slogan`, `created`, `updated`, `color`)
 VALUES
 	(1,'Future','So bright gotta wear shades','2021-02-07 02:54:26','2021-02-07 02:54:40',1),
-	(2,'No name','No slogan','2021-02-07 02:55:02',NULL,2);
+	(2,'No name','No slogan','2021-02-07 02:55:02',NULL,2),
+	(3,'Vanity','I need no color','2021-02-07 03:31:52',NULL,NULL);
 
 /*!40000 ALTER TABLE `examples` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
-# Dump of table example_colors
+# Dump of table examples_with_colors
 # ------------------------------------------------------------
 
-DROP TABLE IF EXISTS `example_colors`;
+DROP VIEW IF EXISTS `examples_with_colors`;
 
-CREATE TABLE `example_colors` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `value` varchar(255) NOT NULL DEFAULT '',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+CREATE TABLE `examples_with_colors` (
+   `id` INT(11) UNSIGNED NOT NULL DEFAULT '0',
+   `name` VARCHAR(255) NOT NULL DEFAULT '',
+   `slogan` VARCHAR(255) NULL DEFAULT NULL,
+   `created` DATETIME NOT NULL DEFAULT '0000-00-00 00:00:00',
+   `updated` DATETIME NULL DEFAULT NULL,
+   `color` INT(11) UNSIGNED NULL DEFAULT NULL,
+   `value` VARCHAR(255) NULL DEFAULT ''
+) ENGINE=MyISAM;
 
-LOCK TABLES `example_colors` WRITE;
-/*!40000 ALTER TABLE `example_colors` DISABLE KEYS */;
-
-INSERT INTO `example_colors` (`id`, `value`)
-VALUES
-	(1,'red'),
-	(2,'blue');
-
-/*!40000 ALTER TABLE `example_colors` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table users
@@ -140,6 +158,23 @@ VALUES
 UNLOCK TABLES;
 
 
+
+
+# Replace placeholder table for examples_with_colors with correct view syntax
+# ------------------------------------------------------------
+
+DROP TABLE `examples_with_colors`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `examples_with_colors`
+AS SELECT
+   `examples`.`id` AS `id`,
+   `examples`.`name` AS `name`,
+   `examples`.`slogan` AS `slogan`,
+   `examples`.`created` AS `created`,
+   `examples`.`updated` AS `updated`,
+   `examples`.`color` AS `color`,
+   `example_colors`.`value` AS `value`
+FROM (`examples` left join `example_colors` on((`examples`.`color` = `example_colors`.`id`)));
 
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
