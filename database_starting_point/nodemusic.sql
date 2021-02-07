@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.7.17)
 # Database: nodemusic
-# Generation Time: 2021-02-07 02:43:11 +0000
+# Generation Time: 2021-02-07 03:03:55 +0000
 # ************************************************************
 
 
@@ -101,7 +101,8 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT '',
   `first_name` varchar(255) DEFAULT NULL,
   `last_name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `users` WRITE;
@@ -109,8 +110,8 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`)
 VALUES
-	(1,'ben@node.se','abc123','Ben','Node'),
-	(2,'bob@node.se','abc123','Bob','Node');
+	(1,'bob@node.se','$2b$10$7s4yfYXT.9ElDSEzW0xw6uv1gE99u45HlK9ESjjbshfAnRhbhqqce','Bob','Node'),
+	(2,'ben@node.se','$2b$10$9HqnbybYby9JQI1o0srtMe4p4ip4PtEhVoUlNNpbKcgTZvufWpOEG','Ben','Node');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;

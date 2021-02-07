@@ -1,13 +1,23 @@
+const bcrypt = require("bcrypt");
+
+
 module.exports = (app, db) => {
 
   // Authentication routes
 
+  // register user
+  app.post('/api/users', async (request, response) => {
+    let password = await bcrypt.hash(request.body.password, 10);
+    let result = await db.query("INSERT INTO users SET ?", { ...request.body, password })
+    response.json(result)
+  });
+
   // authentication: perform login
   app.post('/api/login', async (request, response) => {
-    let user = await db.query('SELECT * FROM users WHERE email = ? AND password = ?', [request.body.email, request.body.password])
+    let user = await db.query('SELECT * FROM users WHERE email = ?', [request.body.email])
     user = user[0]
 
-    if(user && user.email){
+    if(user && user.email && await bcrypt.compare(request.body.password, user.password)){
       request.session.user = user
       user.loggedIn = true
       response.json({loggedIn: true})

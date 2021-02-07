@@ -512,6 +512,48 @@
 			"response": []
 		},
 		{
+			"name": "localhost:3000/api/user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\":\"dude@node.se\",\n    \"password\":\"abc123\",\n    \"first_name\": \"Dude\",\n    \"last_name\": \"Node\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/users/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "localhost:3000/api/login",
 			"event": [
 				{
@@ -531,7 +573,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"ben@node.se\",\n    \"password\":\"abc123\"\n}",
+					"raw": "{\n    \"email\":\"dude@node.se\",\n    \"password\":\"abc123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
