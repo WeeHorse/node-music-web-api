@@ -25,18 +25,24 @@ app.use( session( {
   cookie: { secure: false } // ändra till true för secure cookie (felsöka behövs här nu)
 } ) )
 
-// mysql
-const mysql = require('mysql');
-const db = mysql.createConnection({
-  host     : '127.0.0.1',
-  user     : 'root',
-  password : 'mysql',
-  database : 'nodemusic'
-});
-// vi gör om mysql-metoderna connect och query till promise-metoder så att vi kan använda async/await för att vänta på databasen
-const util = require('util')
-db.connect = util.promisify(db.connect)
-db.query = util.promisify(db.query)
+// mssql
+const db = require('mssql');
+async function connectToMsSql(){
+  try {
+    db.pool = await db.connect({
+      user: 'SA',
+      password: '<YourStrong@Passw0rd>',
+      server: 'localhost', // You can use 'localhost\instance' to connect to named instance
+      database: 'nodemusic',
+    })
+    // let result = await db.pool.request()
+    //     .input('colorId', db.Int, 3)
+    //     .query('SELECT * FROM master.nodemusic.example_colors WHERE id = @colorId')
+    // console.log(result)
+  } catch (err) {
+    console.trace(err)
+  }
+}
 
 // load apis / endpoints
 
@@ -51,7 +57,7 @@ app.use(express.static(path.join(__dirname, '../example-client')))
 
 // start the server
 app.listen(3000, async () => {
-  await db.connect()
+  await connectToMsSql()
   console.log('server running on port 3000')
 })
 

@@ -8,7 +8,12 @@ module.exports = (app, db) => {
   // register user
   app.post('/api/users', async (request, response) => {
     let password = await bcrypt.hash(request.body.password, 10);
-    let result = await db.query("INSERT INTO users SET ?", { ...request.body, password })
+    let result = await db.pool.request()
+      .input('email', db.VarChar, request.body.email)
+      .input('password', db.VarChar, password)
+      .input('first_name', db.VarChar, request.body.first_name)
+      .input('last_name', db.VarChar, request.body.last_name)
+      .query("INSERT INTO master.nodemusic.users (email, password, first_name, last_name) VALUES (@email, @password, @first_name, @last_name)")
     response.json(result)
   });
 
