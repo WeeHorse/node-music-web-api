@@ -19,6 +19,7 @@ async function ytmCached(req, res, db, methodName, argsToUse){
     let {error} = await db.query("INSERT INTO ytm_cache SET request_url = ?, response_body = ?", [req.originalUrl, JSON.stringify(data)])
     if(error){
       console.log(error)
+      res.status(500)
     }
   }
   return data
