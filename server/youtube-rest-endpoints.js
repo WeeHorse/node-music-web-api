@@ -6,19 +6,27 @@ api.initalize()
 
 async function ytmCached(req, res, db, methodName, argsToUse){
   // attempt to get from cached (notice that an empty response body will always pass through to fetch new)
-  let data = await db.query("SELECT * FROM ytm_cache WHERE request_url = ?", req.originalUrl)
-  if(data[0] && data[0].response_body){
+  let data = await db.pool.request()
+    .input('request_url', db.VarChar, req.originalUrl)
+    .query("SELECT * FROM master.nodemusic.ytm_cache WHERE request_url = @request_url")
+  data = data.recordset[0]
+  if(data && data.response_body){
     res.set('x-from-cache', true)
-    data = JSON.parse(data[0].response_body)
+    data = JSON.parse(data.response_body)
   }else{
     // fetch new
     data = await api[methodName](...argsToUse)
     // and respond
     res.set('x-from-cache', false)
     // then cache
-    let {error} = await db.query("INSERT INTO ytm_cache SET request_url = ?, response_body = ?", [req.originalUrl, JSON.stringify(data)])
-    if(error){
-      console.log(error)
+    try {
+      await db.pool.request()
+        .input('request_url', db.VarChar, req.originalUrl)
+        .input('response_body', db.NVarChar(db.MAX), JSON.stringify(data))
+        .query("INSERT INTO master.nodemusic.ytm_cache (request_url, response_body) VALUES (@request_url, @response_body)")
+    }catch(error){
+      console.trace(error)
+      res.status(500)
     }
   }
   return data

@@ -15,13 +15,14 @@ module.exports = (app, db) => {
       .input('last_name', db.VarChar, request.body.last_name)
       .query("INSERT INTO master.nodemusic.users (email, password, first_name, last_name) VALUES (@email, @password, @first_name, @last_name)")
     response.json(result)
-  });
+  })
 
   // authentication: perform login
   app.post('/api/login', async (request, response) => {
-    let user = await db.query('SELECT * FROM users WHERE email = ?', [request.body.email])
-    user = user[0]
-
+    let user = await db.pool.request()
+      .input('email', db.VarChar, request.body.email)
+      .query('SELECT * FROM master.nodemusic.users WHERE email = @email')
+    user = user.recordset[0]
     if(user && user.email && await bcrypt.compare(request.body.password, user.password)){
       request.session.user = user
       user.loggedIn = true
@@ -36,8 +37,11 @@ module.exports = (app, db) => {
   app.get('/api/login', async (request, response) => {
     let user
     if(request.session.user){
-      user = await db.query('SELECT * FROM users WHERE email = ? AND password = ?', [request.session.user.email, request.session.user.password])
-      user = user[0]
+      user = await db.pool.request()
+        .input('email', db.VarChar, request.session.user.email)
+        .input('password', db.VarChar, request.session.user.password)
+        .query('SELECT * FROM master.nodemusic.users WHERE email = @email AND password = @password', [request.session.user.email, request.session.user.password])
+      user = user.recordset[0]
     }
     if(user && user.email){
       user.loggedIn = true
@@ -61,21 +65,23 @@ module.exports = (app, db) => {
 
   // public get all table rows
   app.get('/api/examples', async (request, response) => {
-    let data = await db.query('SELECT * FROM examples')
-    response.json(data)
+    let data = await db.pool.request().query('SELECT * FROM master.nodemusic.examples')
+    response.json(data.recordset)
   })
 
   // public get one table row
   app.get("/api/examples/:id", async (request, response) => {
-    let data = await db.query("SELECT * FROM examples WHERE id = ?", [request.params.id])
-    data = data[0] // single row
+    let data = await db.pool.request()
+      .input('id', db.Int, request.params.id)
+      .query('SELECT * FROM master.nodemusic.examples WHERE id = @id')
+    data = data.recordset[0] // single row
     response.json(data)
   })
 
   // public get another table (happens to be a left joined view)
   app.get("/api/examples_with_colors", async (request, response) => {
-    let data = await db.query("SELECT * FROM examples_with_colors")
-    response.json(data)
+    let data = await db.pool.request().query('SELECT * FROM master.nodemusic.examples_with_colors')
+    response.json(data.recordset)
   })
 
   // private create one row
@@ -84,9 +90,13 @@ module.exports = (app, db) => {
     if(!request.session.user){
       response.status(403) // forbidden
       response.json({error:'not logged in'})
-      return;
+      return
     }
-    let result = await db.query("INSERT INTO examples SET ?", request.body)
+    let result = await db.pool.request()
+      .input('name', db.VarChar, request.body.name)
+      .input('slogan', db.VarChar, request.body.slogan)
+      .input('color', db.Int, request.body.color)
+      .query("INSERT INTO master.nodemusic.examples (name, slogan, color) VALUES (@name, @slogan, @color)")
     response.json(result)
   })
 
@@ -96,9 +106,15 @@ module.exports = (app, db) => {
     if(!request.session.user){
       response.status(403) // forbidden
       response.json({error:'not logged in'})
-      return;
+      return
     }
-    let result = await db.query("UPDATE examples SET ? WHERE id = ?", [request.body, request.params.id] )
+    let result = await db.pool.request()
+      .input('id', db.Int, request.params.id)
+      .input('name', db.VarChar, request.body.name)
+      .input('slogan', db.VarChar, request.body.slogan)
+      .input('updated', db.DateTime, new Date())
+      .input('color', db.Int, request.body.color)
+      .query("UPDATE master.nodemusic.examples SET name = @name, slogan = @slogan, updated = @updated, color = @color WHERE id = @id")
     response.json(result)
   })
 
@@ -108,9 +124,11 @@ module.exports = (app, db) => {
     if(!request.session.user){
       response.status(403) // forbidden
       response.json({error:'not logged in'})
-      return;
+      return
     }
-    let result = await db.query("DELETE FROM examples WHERE id = ?", request.params.id)
+    let result = await db.pool.request()
+      .input('id', db.Int, request.params.id)
+      .query("DELETE FROM master.nodemusic.examples WHERE id = @id")
     response.json(result)
   })
 
