@@ -14,3 +14,4 @@ create table nodemusic.examples
 )
 go
 
+INSERT INTO master.nodemusic.examples (id, name, slogan, created, updated, color) VALUES (1, N'Spring', N'Tra la la la la la', N'2021-02-08 22:06:00.433', null, 1);

@@ -7,5 +7,7 @@ create table nodemusic.example_colors
 )
 go
 
-INSERT INTO master.nodemusic.example_colors (id, value) VALUES (3, N'red');
-INSERT INTO master.nodemusic.example_colors (id, value) VALUES (4, N'blue');
+INSERT INTO master.nodemusic.example_colors (id, value) VALUES (1, N'red');
+INSERT INTO master.nodemusic.example_colors (id, value) VALUES (2, N'blue');
+INSERT INTO master.nodemusic.example_colors (id, value) VALUES (3, N'pink');
+INSERT INTO master.nodemusic.example_colors (id, value) VALUES (4, N'purple');

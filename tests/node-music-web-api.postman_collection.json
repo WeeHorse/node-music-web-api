@@ -24,7 +24,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/yt/search/kingdome+come",
+					"raw": "http://localhost:3000/api/yt/search/spirit+of+the+age",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -34,7 +34,7 @@
 						"api",
 						"yt",
 						"search",
-						"kingdome+come"
+						"spirit+of+the+age"
 					]
 				}
 			},
@@ -59,7 +59,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/yt/suggestions/da",
+					"raw": "http://localhost:3000/api/yt/suggestions/hawk",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -69,7 +69,7 @@
 						"api",
 						"yt",
 						"suggestions",
-						"da"
+						"hawk"
 					]
 				}
 			},
@@ -94,7 +94,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/yt/songs/stop",
+					"raw": "http://localhost:3000/api/yt/songs/go",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -104,7 +104,7 @@
 						"api",
 						"yt",
 						"songs",
-						"stop"
+						"go"
 					]
 				}
 			},
@@ -129,7 +129,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/yt/videos/fasion",
+					"raw": "http://localhost:3000/api/yt/videos/spirit+of+the+age",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -139,7 +139,7 @@
 						"api",
 						"yt",
 						"videos",
-						"fasion"
+						"spirit+of+the+age"
 					]
 				}
 			},
@@ -531,7 +531,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"dude@node.se\",\n    \"password\":\"abc123\",\n    \"first_name\": \"Dude\",\n    \"last_name\": \"Node\"\n}",
+					"raw": "{\n    \"email\":\"zack@node.se\",\n    \"password\":\"abc123\",\n    \"first_name\": \"Zack\",\n    \"last_name\": \"Node\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -573,7 +573,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"dude@node.se\",\n    \"password\":\"abc123\"\n}",
+					"raw": "{\n    \"email\":\"zack@node.se\",\n    \"password\":\"abc123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -617,7 +617,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"ben@node.se\",\n    \"password\":\"abc123\"\n}",
+					"raw": "{\n    \"email\":\"zack@node.se\",\n    \"password\":\"abc123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -658,7 +658,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Past\",\n    \"slogan\": \"From nostaliga to now\",\n    \"color\": 2\n}",
+					"raw": "{\n    \"name\": \"Past\",\n    \"slogan\": \"From nostaliga to now\",\n    \"color\": 4\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -700,7 +700,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Past\",\n    \"slogan\": \"My red guitar\",\n    \"color\": 1\n}",
+					"raw": "{\n    \"name\": \"Past\",\n    \"slogan\": \"My red guitar\",\n    \"color\": 3\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -708,7 +708,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/examples/4",
+					"raw": "localhost:3000/api/examples/6",
 					"host": [
 						"localhost"
 					],
@@ -716,7 +716,7 @@
 					"path": [
 						"api",
 						"examples",
-						"4"
+						"6"
 					]
 				}
 			},
@@ -750,7 +750,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/examples/4",
+					"raw": "localhost:3000/api/examples/6",
 					"host": [
 						"localhost"
 					],
@@ -758,7 +758,7 @@
 					"path": [
 						"api",
 						"examples",
-						"4"
+						"6"
 					]
 				}
 			},
@@ -784,7 +784,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"ben@node.se\",\n    \"password\":\"abc123\"\n}",
+					"raw": "{\n    \"email\":\"zack@node.se\",\n    \"password\":\"abc123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -825,7 +825,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"ben@node.se\",\n    \"password\":\"2134\"\n}",
+					"raw": "{\n    \"email\":\"zack@node.se\",\n    \"password\":\"2134\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -869,7 +869,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"email\":\"ben@node.se\",\n    \"password\":\"abc123\"\n}",
+					"raw": "{\n    \"email\":\"zack@node.se\",\n    \"password\":\"abc123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -910,7 +910,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Past\",\n    \"slogan\": \"From nostaliga to now\",\n    \"color\": 2\n}",
+					"raw": "{\n    \"name\": \"Bonk\",\n    \"slogan\": \"Should not save\",\n    \"color\": 4\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -952,7 +952,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"name\": \"Past\",\n    \"slogan\": \"My red guitar\",\n    \"color\": 1\n}",
+					"raw": "{\n    \"name\": \"Bonk\",\n    \"slogan\": \"Should not update\",\n    \"color\": 4\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -960,7 +960,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/examples/4",
+					"raw": "localhost:3000/api/examples/7",
 					"host": [
 						"localhost"
 					],
@@ -968,7 +968,7 @@
 					"path": [
 						"api",
 						"examples",
-						"4"
+						"7"
 					]
 				}
 			},
@@ -1002,7 +1002,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/examples/4",
+					"raw": "localhost:3000/api/examples/7",
 					"host": [
 						"localhost"
 					],
@@ -1010,7 +1010,7 @@
 					"path": [
 						"api",
 						"examples",
-						"4"
+						"7"
 					]
 				}
 			},
