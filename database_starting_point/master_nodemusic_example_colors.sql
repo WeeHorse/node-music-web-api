@@ -1,4 +1,4 @@
-create table nodemusic.example_colors
+create table example_colors
 (
     id    int identity
         constraint example_colors_pk
@@ -7,7 +7,7 @@ create table nodemusic.example_colors
 )
 go
 
-INSERT INTO master.nodemusic.example_colors (id, value) VALUES (1, N'red');
-INSERT INTO master.nodemusic.example_colors (id, value) VALUES (2, N'blue');
-INSERT INTO master.nodemusic.example_colors (id, value) VALUES (3, N'pink');
-INSERT INTO master.nodemusic.example_colors (id, value) VALUES (4, N'purple');
+INSERT INTO example_colors (value) VALUES (N'red');
+INSERT INTO example_colors (value) VALUES (N'blue');
+INSERT INTO example_colors (value) VALUES (N'pink');
+INSERT INTO example_colors (value) VALUES (N'purple');
