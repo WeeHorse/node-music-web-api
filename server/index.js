@@ -37,7 +37,7 @@ async function connectToMsSql(){
     })
     // let result = await db.pool.request()
     //     .input('colorId', db.Int, 3)
-    //     .query('SELECT * FROM master.nodemusic.example_colors WHERE id = @colorId')
+    //     .query('SELECT * FROM example_colors WHERE id = @colorId')
     // console.log(result)
   } catch (err) {
     console.trace(err)
