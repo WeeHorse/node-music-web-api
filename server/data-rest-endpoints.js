@@ -92,6 +92,7 @@ module.exports = (app, db) => {
       response.json({error:'not logged in'})
       return
     }
+    // https://www.npmjs.com/package/mssql#data-types
     let result = await db.pool.request()
       .input('name', db.VarChar, request.body.name)
       .input('slogan', db.VarChar, request.body.slogan)
