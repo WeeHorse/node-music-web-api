@@ -1,13 +1,13 @@
 async function search(){
   let str = document.querySelector('#search').value
-  let response = await fetch('http://localhost:3000/api/yt/search/' + str)
+  let response = await fetch('/api/yt/search/' + str)
   let data = await response.json()
   document.querySelector('textarea').value = JSON.stringify(data, undefined, 4)
 }
 
 async function searchSongs(){
   let str = document.querySelector('#search-songs').value
-  let response = await fetch('http://localhost:3000/api/yt/songs/' + str)
+  let response = await fetch('/api/yt/songs/' + str)
   let data = await response.json()
   document.querySelector('textarea').value = JSON.stringify(data, undefined, 4)
 }
@@ -18,8 +18,10 @@ let player
 function playSong(){
   let id = document.querySelector('#song-id').value
   player.loadVideoById(id)
+  // document.querySelector('#yt-player').innerHTML = `
+  //   <lite-youtube videoid="${id}" params="enablejsapi=1" autoload></lite-youtube>
+  // `
 }
-
 
 // gets called automatically when YouTube player loads
 function onYouTubeIframeAPIReady() {
@@ -30,7 +32,8 @@ function onYouTubeIframeAPIReady() {
     height: '300',
     width: '400',
     events: {
-      'onStateChange': onPlayerStateChange
+      'onStateChange': onPlayerStateChange,
+      'onReady': () => console.log('Player loaded')
     }
   });
 }
@@ -39,4 +42,16 @@ function onYouTubeIframeAPIReady() {
 // can be used to update things, like counters
 function onPlayerStateChange(event) {
   if (event.data != YT.PlayerState.PLAYING) return
+}
+
+test().then(res => test(res.next))
+
+async function test(next) {
+  let category = 'songs'
+  let search = 'in flames'
+
+  let res = await fetch('/api/yt/'+category+'/'+search + (next ? `?next=${next}` : ''))
+  res = await res.json();
+  console.log(res);
+  return res
 }

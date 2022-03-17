@@ -1,14 +1,17 @@
 // server port
-const port = 3000
+const port = process.env.PORT || 4000
 
 // express server
 const express = require('express')
 const app = express()
 
+// add CORS
+const cors = require('cors')
+app.use(cors())
+
 // add body-parser to express
-const bodyParser = require('body-parser')
 // register as middleware
-app.use( bodyParser.json() )
+app.use( express.json() )
 
 // add cookie-parser to express
 const cookieParser = require('cookie-parser')
@@ -22,21 +25,11 @@ app.use( session( {
   secret: 'keyboard cat boddyfollymeskaweq456',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: false } // ändra till true för secure cookie (felsöka behövs här nu)
+  cookie: { secure: false } 
 } ) )
 
-// mysql
-const mysql = require('mysql');
-const db = mysql.createConnection({
-  host     : '127.0.0.1',
-  user     : 'root',
-  password : 'mysql',
-  database : 'nodemusic'
-});
-// vi gör om mysql-metoderna connect och query till promise-metoder så att vi kan använda async/await för att vänta på databasen
-const util = require('util')
-db.connect = util.promisify(db.connect)
-db.query = util.promisify(db.query)
+const DbHandler = require('./DbHandler')
+let db = new DbHandler('./server/data.db')
 
 // load apis / endpoints
 
@@ -50,9 +43,8 @@ const path = require('path')
 app.use(express.static(path.join(__dirname, '../example-client')))
 
 // start the server
-app.listen(3000, async () => {
-  await db.connect()
-  console.log('server running on port 3000')
+app.listen(port, () => {
+  console.log('server running on http://localhost:' + port)
 })
 
 
